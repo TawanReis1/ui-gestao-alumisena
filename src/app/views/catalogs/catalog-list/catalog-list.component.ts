@@ -3,7 +3,6 @@ import { Product } from '../../../shared/classes/product';
 import { CatalogService } from '../../../shared/services/catalog.service';
 import { Router } from '@angular/router';
 import { ToastrHelper } from 'src/app/shared/helpers/toastr';
-import * as moment from 'moment';
 import swal from 'sweetalert2';
 
 @Component({

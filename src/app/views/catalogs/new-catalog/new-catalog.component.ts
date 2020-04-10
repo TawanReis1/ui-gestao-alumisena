@@ -23,7 +23,6 @@ export class NewCatalogComponent implements OnInit {
 
   async createProduct() {
     try {
-      console.log('this.product :', this.product);
       this.product.createdBy = this.currentUser.data._id;
       await this.catalogService.create(this.product);
 

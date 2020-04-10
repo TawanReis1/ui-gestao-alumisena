@@ -1,1 +1,36 @@
-<p>new-quote works!</p>
+<app-loader class="full-size" [condition]="isLoading"></app-loader>
+
+<div class="row" *ngIf="!isLoading">
+    <div class="col-lg-12">
+        <h5>Novo Orçamento</h5>
+        <hr />
+    </div>
+
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Nome do Orçamento</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="quote.name">
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Cliente</label>
+        <!-- <ng-select [items]="allClients"
+                   [virtualScroll]="true"
+                   bindLabel="name"
+                   placeholder="Selecione o Cliente"
+                   [(ngModel)]="quote.client"></ng-select> -->
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Preço</label>
+        <input type="text" name="name" class="form-control input-sm" prefix="R$ " mask="separator.2" thousandSeparator="," [(ngModel)]="product.price">
+    </div>
+    
+
+    <div class="col-lg-12" style="margin-top: 100px;">
+        <button (click)="createProduct()" class="pull-right btn btn-primary">Salvar</button>
+        <button (click)="cancel()" class="pull-right btn btn-secundary m-r-10">Cancelar</button>
+    </div>
+</div>
+
+<!-- <select name="user" class="form-control" [(ngModel)]="selectedUser" (change)="setClientEmail(selectedUser)">
+    <option value="" selected></option>
+    <option *ngFor="let user of allUsers" [ngValue]="user">{{user?.name}} - {{user?.document}}</option>
+</select> -->
