@@ -1,0 +1,87 @@
+<app-loader class="full-size" [condition]="isLoading"></app-loader>
+
+<div class="row" *ngIf="!isLoading">
+    <div class="col-lg-12" style="margin-bottom: 20px;">
+        <h5>Detalhes do Cliente</h5>
+        <small *ngIf="updationInformations != null" class="pull-right" style="font-style: italic;"> | Atualizado por: {{updationInformations.name || ' '}} </small>
+        <small class="pull-right" style="font-style: italic;"> Criado por: {{creationInformations.name}} </small>
+        <hr />
+    </div>
+
+    <div class="col-lg-8" style="margin-bottom: 5px;">
+        <label *ngIf="client.type == 'PRIVATE_INDIVIDUAL'" for="name">Nome Completo</label>
+        <label *ngIf="client.type == 'LEGAL_ENTITY'" for="name">Razão Social</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="client.name">
+    </div>
+    <div class="col-lg-2" style="margin-bottom: 5px;">
+        <label *ngIf="client.type == 'LEGAL_ENTITY'" for="personType">Data de Fundação</label>
+        <label *ngIf="client.type == 'PRIVATE_INDIVIDUAL'" for="personType">Data de Nascimento</label>
+        <p>{{client.birthFundationDate | date: 'dd/MM/yyyy':'BRT'}}</p>
+    </div>
+    <div class="col-lg-2" style="margin-bottom: 5px;">
+        <label for="personType">Tipo</label>
+        <select name="personType" class="form-control" [(ngModel)]="client.type">
+            <option value="PRIVATE_INDIVIDUAL" selected>Física</option>
+            <option value="LEGAL_ENTITY">Jurídica</option>
+        </select>
+    </div>
+    <div class="col-lg-3" style="margin-bottom: 50px;">
+        <label for="phone">RG</label>
+        <ng-container *ngIf="client.type == 'PRIVATE_INDIVIDUAL'">
+            <input type="text" name="phone" class="form-control" [(ngModel)]="client.rg">
+        </ng-container>
+        <ng-container *ngIf="client.type == 'LEGAL_ENTITY'">
+            <input type="text" name="phone" class="form-control" disabled>
+        </ng-container>
+    </div>
+    <div class="col-lg-3" style="margin-bottom: 50px;">
+        <ng-container *ngIf="client.type == 'PRIVATE_INDIVIDUAL'">
+            <label for="phone">CPF</label>
+            <input type="text" name="name" class="form-control" mask="000.000.000-00" [(ngModel)]="client.cpfCnpj">
+        </ng-container>
+        <ng-container *ngIf="client.type == 'LEGAL_ENTITY'">
+            <label for="phone">CNPJ</label>
+            <input type="text" name="name" class="form-control" mask="00.000.000/0000-00" [(ngModel)]="client.cpfCnpj">
+        </ng-container>
+    </div>
+    <div class="col-lg-3" style="margin-bottom: 50px;">
+        <label for="phone">Telefone</label>
+        <ng-container *ngIf="client.telephone.length === 10">
+            <input type="text" name="phone" class="form-control" mask="(00) 0000-0000" [(ngModel)]="client.telephone">
+        </ng-container>
+        <ng-container *ngIf="client.telephone.length === 11">
+            <input type="text" name="phone" class="form-control" mask="(00) 00000-0000" [(ngModel)]="client.telephone">
+        </ng-container>
+    </div>
+    <div class="col-lg-3" style="margin-bottom: 50px;">
+        <label for="name">E-mail</label>
+        <input type="email" name="name" class="form-control" [(ngModel)]="client.email">
+    </div>
+
+    <div class="col-lg-10" style="margin-bottom: 5px;">
+        <label for="name">Rua</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="client.street">
+    </div>
+    <div class="col-lg-2" style="margin-bottom: 5px;">
+        <label for="name">Número</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="client.houseNumber">
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 75px;">
+        <label for="name">Cidade</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="client.city">
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 75px;">
+        <label for="name">Bairro</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="client.neighborhood">
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 75px;">
+        <label for="name">CEP</label>
+        <input type="text" name="name" class="form-control input-sm" mask="00000-000" [(ngModel)]="client.cep">
+    </div>    
+
+    <div class="col-lg-12" style="margin-top: 100px;">
+        <button class="btn btn-danger pull-left" (click)="deleteClient(client._id)">Apagar</button>
+        <button (click)="updateClient()" class="pull-right btn btn-primary">Atualizar</button>
+        <button (click)="cancel()" class="pull-right btn btn-secundary m-r-10">Cancelar</button>
+    </div>
+</div>

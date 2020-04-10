@@ -1,0 +1,109 @@
+<div class="limiter">
+    <div class="container-custom">
+        <div class="wrap-custom" *ngIf="screen === 'login'">
+            <div class="login-form">
+                <span class="login-title padding-bottom">
+                    Bem-Vindo!
+                </span>
+                <span class="login-title">
+                    <img class="image-login" src="../../../assets/logo.png">
+                </span>
+
+                <div class="form-group">
+                    <label for="username">E-mail</label>
+                    <input type="text" id="username" name="username" [(ngModel)]="user.email" class="form-control"
+                        [ngClass]="{ 'is-invalid': !user.email && loginSubmitted }" />
+                    <div *ngIf="!user.email && loginSubmitted">
+                        <p style="color:red">Preencha o campo e-mail</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" class="form-control"
+                        [(ngModel)]="user.password" [ngClass]="{ 'is-invalid': !user.password && loginSubmitted }" />
+                    <div *ngIf="!user.password && loginSubmitted">
+                        <div style="color:red">Preencha o campo senha</div>
+                    </div>
+                </div>
+                <div class="container-login-form-btn">
+                    <button [disabled]="loading" class="login-btn m-b-15" (click)="login()">Entrar</button>
+                </div>
+                <div class="container-login-form-btn p-t-70">
+                    <button [disabled]="loading" class="sign-btn" (click)="changeScreen('sign')">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+        <div class="wrap-custom-sign" *ngIf="screen === 'sign'">
+            <i class="fas fa-arrow-left fa-2x" style="cursor: pointer;" (click)="changeScreen('login')"></i>
+            <div class="login-form">
+                <span class="login-title padding-bottom">
+                    Cadastrar Usuário!
+                </span>
+                <span class="login-title">
+                    <img class="image-login" src="../../../assets/logo.png">
+                </span>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="username">Nome</label>
+                            <input type="text" id="username" name="username" [(ngModel)]="userSign.name"
+                                class="form-control" [ngClass]="{ 'is-invalid': !userSign.name && signSubmitted }" />
+                            <div *ngIf="!userSign.name && signSubmitted">
+                                <p style="color:red">Preencha o campo nome</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="usernameSign">E-mail</label>
+                            <input type="email" id="usernameSign" name="usernameSign" [(ngModel)]="userSign.email"
+                                class="form-control" [ngClass]="{ 'is-invalid': !userSign.email && signSubmitted }" />
+                            <div *ngIf="!userSign.email && signSubmitted">
+                                <p style="color:red">Preencha o campo e-mail</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="documentSign">CPF</label>
+                            <input type="text" id="documentSign" name="documentSign" class="form-control"
+                                [(ngModel)]="userSign.document" mask="000.000.000-00"
+                                [ngClass]="{ 'is-invalid': !userSign.document && signSubmitted }" />
+                            <div *ngIf="!userSign.document && signSubmitted">
+                                <div style="color:red">Preencha o campo CPF
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="passwordSign">Senha</label>
+                            <input type="password" id="passwordSign" name="passwordSign" [(ngModel)]="userSign.password"
+                                class="form-control" [ngClass]="{ 'is-invalid': !userSign.email && signSubmitted }" />
+                            <div *ngIf="!userSign.password && signSubmitted">
+                                <p style="color:red">Preencha o campo senha</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="confimrpPasswordSign">Confirmação de Senha</label>
+                            <input type="password" id="confimrpPasswordSign" name="confimrpPasswordSign" class="form-control"
+                                [(ngModel)]="auxPassword" [ngClass]="{ 'is-invalid': !auxPassword && signSubmitted }" />
+                            <div *ngIf="!auxPassword && signSubmitted">
+                                <div style="color:red">Preencha o campo confirmação de senha</div>
+                            </div>
+                            <div *ngIf="(auxPassword !== userSign.password) && auxPassword !== '' && signSubmitted">
+                                <div style="color:red">Senhas diferentes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-login-form-btn">
+                    <button class="login-btn m-b-15" (click)="sign()">Criar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

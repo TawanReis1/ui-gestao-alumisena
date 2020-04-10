@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-lg-12">
+        <!-- <h3 class="pull-left">Clientes</h3> -->
+        <button type="button" class="btn btn-primary pull-right" (click)="changeScreen('new')">
+            <i class="fas fa-plus m-r-10"></i>Novo Produto
+        </button>
+        <!-- <button type="button" class="btn btn-primary pull-right m-r-10" (click)="changeScreen('cashback')">
+                <i class="fas fa-search m-r-10"></i>Consultar Cashback
+            </button> -->
+    </div>
+    <!-- <div class="col-lg-12">
+            <h3>Filtros</h3>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="code">Código</label>
+                        <input type="text" id="code" name="code" class="form-control form-control-sm"
+                            [(ngModel)]="filterCode">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="code">Data</label><br>
+                        <dp-date-picker [(ngModel)]="filterPurchaseDate" theme="dp-material" [config]="datePickerConfig">
+                        </dp-date-picker>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="code">Status</label>
+                        <select id="filter_status" name="filter_status" class="form-control form-control-sm"
+                            [(ngModel)]="filterStatus">
+                            <option value=""></option>
+                            <option value="APPROVED">Aprovado</option>
+                            <option value="ANALYZING">Em validação</option>
+                            <option value="REPROVED">Reprovado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="pull-right">
+                        <button class="btn btn-xs btn-secundary m-r-5" (click)="clearFilter()"
+                            [disabled]="!filterCode && !filterPurchaseDate && !filterStatus"><i
+                                class="fas fa-trash m-r-10"></i>Limpar</button>
+                        <button class="btn btn-xs btn-success" (click)="applyFilter()"><i
+                                class="fas fa-check m-r-10"></i>Aplicar</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    <app-loader class="full-size" [condition]="isLoading"></app-loader>
+    <div class="col-lg-12 m-t-30" *ngIf="allProducts.meta.totalItems > 0 && !isLoading">
+        <table class="table-bordered m-b-30" style="width: 100%;">
+            <thead>
+                <th style="width: 50%;">Nome</th>
+                <th style="width: 10%;">Cadastrado em</th>
+                <th style="width: 10%;">Preço</th>
+                <th style="width: 10%;">Estoque</th>
+                <th style="width: 10%;">Disponível?</th>
+                <th style="width: 10%;">Opções</th>
+            </thead>
+            <tbody *ngFor="let product of allProducts.data; let i = index">
+                <td>{{product?.name}}</td>
+                <td>{{product?.createdAt | date: 'dd/MM/yyyy HH:mm':'BRT'}}</td>
+                <td>{{product?.price | currency:'BRL':true}}</td>
+                <td>{{product?.quantity}} {{product?.typeQuantity}}</td>
+                <td [ngSwitch]="product?.available">
+                    <ng-container *ngSwitchCase="true">Sim</ng-container>
+                    <ng-container *ngSwitchCase="false">Não</ng-container>
+                </td>
+                <td>
+                    <button class="btn"><i class="fas fa-edit" (click)="enterDetails(product._id)"></i></button>
+                    <button class="btn" style="color: red;" (click)="deleteProduct(product._id, i)"><i
+                            class="fas fa-trash"></i></button>
+                </td>
+            </tbody>
+        </table>
+        <div class="col-12 center-content">
+            <ngb-pagination [rotate]="true" maxSize="5" [collectionSize]="allProducts.meta.totalItems" [(page)]="page"
+                pageSize="10" (pageChange)="changePage($event)">
+            </ngb-pagination>
+        </div>
+    </div>
+
+    <div class="col-lg-12 m-t-30 center-content" *ngIf="allProducts.meta.totalItems === 0 && !isLoading">
+        <h4 style="color: red;">Não existem nenhum produto cadastrado</h4>
+    </div>
+</div>
