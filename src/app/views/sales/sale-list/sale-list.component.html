@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <!-- <h3 class="pull-left">Clientes</h3> -->
         <button type="button" class="btn btn-primary pull-right" (click)="changeScreen('new')">
-            <i class="fas fa-plus m-r-10"></i>Novo Orçamento
+            <i class="fas fa-plus m-r-10"></i>Nova Venda
         </button>
         <!-- <button type="button" class="btn btn-primary pull-right m-r-10" (click)="changeScreen('cashback')">
                 <i class="fas fa-search m-r-10"></i>Consultar Cashback
@@ -49,41 +49,47 @@
             </div>
         </div> -->
     <app-loader class="full-size" [condition]="isLoading"></app-loader>
-    <div class="col-lg-12 m-t-30" *ngIf="allQuotes.meta.totalItems > 0 && !isLoading">
-        <table class="table-bordered m-b-30" style="width: 100%;">
+    <div class="col-lg-12 m-t-30" *ngIf="allSales.meta.totalItems > 0 && !isLoading">
+        <table class="table-striped m-b-30" style="width: 100%;">
             <thead>
-                <th style="width: 50%;">Nome</th>
+                <th style="width: 30%;">Nome</th>
                 <th style="width: 10%;">Cadastrado em</th>
-                <th style="width: 10%;">Validade</th>
+                <th style="width: 10%;">Vendida em</th>
                 <th style="width: 10%;">Preço</th>
+                <th style="width: 20%;">Cliente</th>
                 <th style="width: 10%;">Meio de Pagamento</th>
                 <th style="width: 10%;">Opções</th>
             </thead>
-            <tbody *ngFor="let quote of allQuotes.data; let i = index">
-                <td>{{quote?.name}}</td>
-                <td>{{quote?.createdAt | date: 'dd/MM/yyyy HH:mm':'BRT'}}</td>
-                <td>{{quote?.validUntil | date: 'dd/MM/yyyy HH:mm':'BRT'}}</td>
-                <td>{{quote?.total | currency:'BRL':true}}</td>
-                <td [ngSwitch]="quote?.paymentMethod">
+            <tbody *ngFor="let sale of allSales.data; let i = index">
+                <td>{{sale?.name}}</td>
+                <td>{{sale?.createdAt | date: 'dd/MM/yyyy HH:mm':'BRT'}}</td>
+                <td>
+                    <ng-container *ngIf="sale.soldAt !== null">{{sale?.soldAt | date: 'dd/MM/yyyy HH:mm':'BRT'}}</ng-container>
+                    <ng-container *ngIf="!sale.soldAt">-</ng-container>                    
+                </td>
+                <td>{{sale?.total | currency:'BRL':true}}</td>
+                <td>{{sale?.client?.name}}</td>
+                <td [ngSwitch]="sale?.paymentMethod">
                     <ng-container *ngSwitchCase="'INVOICE'">Boleto Bancário</ng-container>
                     <ng-container *ngSwitchCase="'CREDIT_CARD'">Cartão de Crédito</ng-container>
                     <ng-container *ngSwitchCase="'MONEY'">Dinheiro</ng-container>
+                    <ng-container *ngSwitchDefault>-</ng-container>
                 </td>
                 <td>
-                    <button class="btn"><i class="fas fa-edit" (click)="enterDetails(quote._id)"></i></button>
-                    <button class="btn" style="color: red;" (click)="deleteQuote(quote._id, i)"><i
+                    <button class="btn" (click)="enterDetails(sale._id)"><i class="fas fa-edit"></i></button>
+                    <button *ngIf="sale.status != 'SOLD'" class="btn" style="color: red;" (click)="deleteSale(sale._id, i)"><i
                             class="fas fa-trash"></i></button>
                 </td>
             </tbody>
         </table>
         <div class="col-12 center-content">
-            <ngb-pagination [rotate]="true" maxSize="5" [collectionSize]="allQuotes.meta.totalItems" [(page)]="page"
+            <ngb-pagination [rotate]="true" maxSize="5" [collectionSize]="allSales.meta.totalItems" [(page)]="page"
                 pageSize="10" (pageChange)="changePage($event)">
             </ngb-pagination>
         </div>
     </div>
 
-    <div class="col-lg-12 m-t-30 center-content" *ngIf="allQuotes.meta.totalItems === 0 && !isLoading">
+    <div class="col-lg-12 m-t-30 center-content" *ngIf="allSales.meta.totalItems === 0 && !isLoading">
         <h4 style="color: red;">Não existem nenhum orçamento cadastrado</h4>
     </div>
 </div>

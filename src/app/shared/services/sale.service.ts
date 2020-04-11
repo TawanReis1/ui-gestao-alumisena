@@ -5,12 +5,12 @@ import { environment } from '../../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
-export class QuoteService {
+export class SaleService {
   url: string;
   authInformations: any;
 
   constructor(private http: HttpClient) {
-    this.url = `${environment.flierApi}/quote`;
+    this.url = `${environment.flierApi}/sale`;
     this.authInformations = localStorage.getItem('auth');
     this.authInformations = JSON.parse(this.authInformations);
   }

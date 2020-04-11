@@ -9,10 +9,10 @@
                 <a (click)="currentRoute('clients')" [routerLink]="['/clients']"><i class="fas fa-users m-r-10"></i>Clientes</a>
             </li>
             <li [ngClass]="{active: activeRoute('catalogs')}">
-                <a (click)="currentRoute('catalogs')" [routerLink]="['/catalogs']"><i class="fas fa-file m-r-10"></i>Catálogos</a>
+                <a (click)="currentRoute('catalogs')" [routerLink]="['/catalogs']"><i class="fas fa-th m-r-10"></i>Catálogos</a>
             </li>
-            <li [ngClass]="{active: activeRoute('quotes')}">
-                <a (click)="currentRoute('quotes')" [routerLink]="['/quotes']"><i class="fas fa-users m-r-10"></i>Orçamentos</a>
+            <li [ngClass]="{active: activeRoute('sales')}">
+                <a (click)="currentRoute('sales')" [routerLink]="['/sales']"><i class="fas fa-money-check-alt m-r-10"></i>Vendas</a>
             </li>
             <li [ngClass]="{active: activeRoute('reports')}">
                 <a (click)="currentRoute('reports')" [routerLink]="['/reports']"><i class="fas fa-file m-r-10"></i>Relatórios</a>
@@ -25,7 +25,7 @@
             <ng-container [ngSwitch]="url">
                 <h3 *ngSwitchCase="'clients'" class="pull-left" style="padding: 5px;">Clientes</h3>
                 <h3 *ngSwitchCase="'catalogs'" class="pull-left" style="padding: 5px;">Catálogos</h3>
-                <h3 *ngSwitchCase="'quotes'" class="pull-left" style="padding: 5px;">Orçamentos</h3>
+                <h3 *ngSwitchCase="'sales'" class="pull-left" style="padding: 5px;">Vendas</h3>
                 <h3 *ngSwitchCase="'reports'" class="pull-left" style="padding: 5px;">Relatórios</h3>
             </ng-container>
             <p style="cursor: pointer;" class="pull-right m-r-15" (click)="logout()"><i class="fas fa-power-off"></i>

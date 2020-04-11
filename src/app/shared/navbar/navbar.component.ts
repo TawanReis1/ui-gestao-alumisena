@@ -58,8 +58,8 @@ export class NavbarComponent implements OnInit {
     
     if (this.url.includes('catalogs')) {
       this.url = 'catalogs';
-    } else if (this.url.includes('quotes')) {
-      this.url = 'quotes';
+    } else if (this.url.includes('sales')) {
+      this.url = 'sales';
     } else if (this.url.includes('reports')) {
       this.url = 'reports';
     }    

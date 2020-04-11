@@ -1,42 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Quote } from '../../../shared/classes/quote';
-import { QuoteService } from '../../../shared/services/quote.service';
+import { Sale } from '../../../shared/classes/sale';
+import { SaleService } from '../../../shared/services/sale.service';
 import { Router } from '@angular/router';
 import { ToastrHelper } from 'src/app/shared/helpers/toastr';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-quote-list',
-  templateUrl: './quote-list.component.html',
-  styleUrls: ['./quote-list.component.scss']
+  selector: 'app-sale-list',
+  templateUrl: './sale-list.component.html',
+  styleUrls: ['./sale-list.component.scss']
 })
-export class QuoteListComponent implements OnInit {
-  quote: Quote = new Quote();
+export class SaleListComponent implements OnInit {
+  sale: Sale = new Sale();
   isLoading: Boolean;
-  allQuotes: any = {
+  allSales: any = {
     data: [],
     meta: {}
   };
   page: Number = 1;
   filterFields: any = {};
 
-  constructor(private router: Router, private quoteService: QuoteService, private toastr: ToastrHelper) { }
+  constructor(private router: Router, private saleService: SaleService, private toastr: ToastrHelper) { }
 
   ngOnInit() {
-    this.getQuotes();
+    this.getSales();
   }
 
-  async getQuotes(filterFields = {}) {
+  async getSales(filterFields = {}) {
     try {
       this.isLoading = true;
       if (Object.keys(filterFields).length === 0) {
         filterFields = { page: this.page, limit: 10 }
       }
 
-      let response = await this.quoteService.get(filterFields);
+      let response = await this.saleService.get(filterFields);
 
-      this.allQuotes.data = response['data'];
-      this.allQuotes.meta = response['meta'];
+      this.allSales.data = response['data'];
+      this.allSales.meta = response['meta'];
 
       this.isLoading = false;
 
@@ -52,7 +52,7 @@ export class QuoteListComponent implements OnInit {
       this.filterFields['page'] = this.page;
 
       this.formatFilterFields();
-      await this.getQuotes(this.filterFields)
+      await this.getSales(this.filterFields)
 
     } catch (err) {
       this.toastr.showError('Erro ao acessar outra página', 'Erro');
@@ -69,9 +69,9 @@ export class QuoteListComponent implements OnInit {
   changeScreen(screen, id = "") {
     try {
       if (screen === 'new') {
-        this.router.navigate(['/quotes/new/quote']);
+        this.router.navigate(['/sales/new/sale']);
       } else {
-        this.router.navigate(['/quotes/', id]);
+        this.router.navigate(['/sales/', id]);
       }
 
     } catch (err) {
@@ -80,7 +80,7 @@ export class QuoteListComponent implements OnInit {
     }
   }
 
-  async deleteQuote(id, i) {
+  async deleteSale(id, i) {
     swal({
       title: 'Você tem certeza?',
       text: 'Você não será capaz de reverter isso!',
@@ -94,9 +94,9 @@ export class QuoteListComponent implements OnInit {
 
     }).then((result) => {
       if (result.value) {
-        this.quoteService.delete(id)
+        this.saleService.delete(id)
           .then(res => {
-            this.allQuotes.data.splice(i, 1);
+            this.allSales.data.splice(i, 1);
           });
         swal(
           'Apagado!',
@@ -108,7 +108,7 @@ export class QuoteListComponent implements OnInit {
   }
 
   enterDetails(id) {
-    this.router.navigate(['/quotes', id]);
+    this.router.navigate(['/sales', id]);
   }
 
 }

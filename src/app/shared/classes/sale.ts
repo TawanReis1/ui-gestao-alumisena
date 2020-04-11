@@ -1,12 +1,12 @@
-import { Product } from './product'
-
-export class Quote {
+export class Sale {
+    _id: String;
+    status: String;
     name: String;
     client: String;
     aditionalEmail: String;
-    products: [Product];
+    products: any;
     total: Number;
-    validUntil: any;
+    soldAt: any;
     paymentMethod: String;
     createdBy: {
         type: String;

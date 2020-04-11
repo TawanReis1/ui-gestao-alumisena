@@ -50,7 +50,7 @@
         </div> -->
     <app-loader class="full-size" [condition]="isLoading"></app-loader>
     <div class="col-lg-12 m-t-30" *ngIf="allProducts.meta.totalItems > 0 && !isLoading">
-        <table class="table-bordered m-b-30" style="width: 100%;">
+        <table class="table-striped m-b-30" style="width: 100%;">
             <thead>
                 <th style="width: 50%;">Nome</th>
                 <th style="width: 10%;">Cadastrado em</th>
@@ -69,7 +69,7 @@
                     <ng-container *ngSwitchCase="false">Não</ng-container>
                 </td>
                 <td>
-                    <button class="btn"><i class="fas fa-edit" (click)="enterDetails(product._id)"></i></button>
+                    <button class="btn" (click)="enterDetails(product._id)"><i class="fas fa-edit"></i></button>
                     <button class="btn" style="color: red;" (click)="deleteProduct(product._id, i)"><i
                             class="fas fa-trash"></i></button>
                 </td>

@@ -34,6 +34,7 @@ export class CatalogDetailsComponent implements OnInit {
 
       this.product = response['data'];
       this.creationInformations = this.product.createdBy;
+      console.log('this.creationInformations :', this.creationInformations);
       this.updationInformations = this.product.updatedBy;
       this.isLoading = false;
 

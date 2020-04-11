@@ -12,6 +12,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { IConfig } from 'ngx-mask';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,9 +26,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { CatalogDetailsComponent } from './views/catalogs/catalog-details/catalog-details.component';
 import { CatalogListComponent } from './views/catalogs/catalog-list/catalog-list.component';
 import { NewCatalogComponent } from './views/catalogs/new-catalog/new-catalog.component';
-import { QuoteDetailsComponent } from './views/quotes/quote-details/quote-details.component';
-import { QuoteListComponent } from './views/quotes/quote-list/quote-list.component';
-import { NewQuoteComponent } from './views/quotes/new-quote/new-quote.component';
+import { SaleDetailsComponent } from './views/sales/sale-details/sale-details.component';
+import { SaleListComponent } from './views/sales/sale-list/sale-list.component';
+import { NewSaleComponent } from './views/sales/new-sale/new-sale.component';
 import { ReportDetailsComponent } from './views/reports/report-details/report-details.component';
 import { ReportListComponent } from './views/reports/report-list/report-list.component';
 import { NewReportComponent } from './views/reports/new-report/new-report.component';
@@ -46,9 +47,9 @@ registerLocaleData(localePt)
     CatalogDetailsComponent,
     CatalogListComponent,
     NewCatalogComponent,
-    QuoteDetailsComponent,
-    QuoteListComponent,
-    NewQuoteComponent,
+    SaleDetailsComponent,
+    SaleListComponent,
+    NewSaleComponent,
     ReportDetailsComponent,
     ReportListComponent,
     NewReportComponent,
@@ -62,7 +63,8 @@ registerLocaleData(localePt)
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    NgSelectModule
   ],
   providers: [
     AuthorizeGuard,

@@ -13,9 +13,9 @@ import { CatalogListComponent } from './views/catalogs/catalog-list/catalog-list
 import { CatalogDetailsComponent } from './views/catalogs/catalog-details/catalog-details.component';
 import { NewCatalogComponent } from './views/catalogs/new-catalog/new-catalog.component';
 
-import { QuoteListComponent } from './views/quotes/quote-list/quote-list.component';
-import { QuoteDetailsComponent } from './views/quotes/quote-details/quote-details.component';
-import { NewQuoteComponent } from './views/quotes/new-quote/new-quote.component';
+import { SaleListComponent } from './views/sales/sale-list/sale-list.component';
+import { SaleDetailsComponent } from './views/sales/sale-details/sale-details.component';
+import { NewSaleComponent } from './views/sales/new-sale/new-sale.component';
 
 import { ReportListComponent } from './views/reports/report-list/report-list.component';
 import { ReportDetailsComponent } from './views/reports/report-details/report-details.component';
@@ -33,9 +33,9 @@ const routes: Routes = [
       { path: 'catalogs/:id', component: CatalogDetailsComponent },
       { path: 'catalogs/new/catalog', component: NewCatalogComponent },
 
-      { path: 'quotes', component: QuoteListComponent },
-      { path: 'quotes/:id', component: QuoteDetailsComponent },
-      { path: 'quotes/new/quote', component: NewQuoteComponent },
+      { path: 'sales', component: SaleListComponent },
+      { path: 'sales/:id', component: SaleDetailsComponent },
+      { path: 'sales/new/sale', component: NewSaleComponent },
 
       { path: 'reports', component: ReportListComponent },
       { path: 'reports/:id', component: ReportDetailsComponent },

@@ -50,7 +50,7 @@
         </div> -->
     <app-loader class="full-size" [condition]="isLoading"></app-loader>
     <div class="col-lg-12 m-t-30" *ngIf="allClients.meta.totalItems > 0 && !isLoading">
-        <table class="table-bordered m-b-30" style="width: 100%;">
+        <table class="table-striped m-b-30" style="width: 100%;">
             <thead>
                 <th style="width: 40%;">Nome</th>
                 <th style="width: 10%;">Cliente desde</th>
@@ -66,7 +66,7 @@
                 <td>{{client?.orderQuantity}}</td>
                 <td>{{client?.totalSpent | currency:'BRL':true}}</td>
                 <td>
-                    <button class="btn"><i class="fas fa-edit" (click)="enterDetails(client._id)"></i></button>
+                    <button class="btn" (click)="enterDetails(client._id)"><i class="fas fa-edit"></i></button>
                     <button class="btn" style="color: red;" (click)="deleteClient(client._id, i)"><i
                             class="fas fa-trash"></i></button>
                 </td>

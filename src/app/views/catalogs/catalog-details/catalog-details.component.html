@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-lg-12" style="margin-bottom: 20px;">
-        <h5>Detalhes do Produto</h5>
+        <h5 class="pull-left">Detalhes do Produto</h5>
         <small *ngIf="updationInformations != null" class="pull-right" style="font-style: italic;"> | Atualizado por: {{updationInformations.name || ' '}} </small>
         <small class="pull-right" style="font-style: italic;"> Criado por: {{creationInformations.name}} </small>
-        <hr />
+        <hr style="margin-top: 40px;">
     </div>
 
     <div class="col-lg-2" style="margin-bottom: 5px;">
-        <label for="name" pattern="[0-9]">Código</label>
+        <label for="name">Código</label>
         <input type="text" name="name" class="form-control input-sm" [(ngModel)]="product.code">
     </div>
     <div class="col-lg-10" style="margin-bottom: 5px;">
