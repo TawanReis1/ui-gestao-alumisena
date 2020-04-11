@@ -10,7 +10,7 @@ export class ClientService {
   authInformations: any;
 
   constructor(private http: HttpClient) {
-    this.url = `${environment.flierApi}/client`;
+    this.url = `${environment.gestaoAlumisenaApi}/client`;
     this.authInformations = localStorage.getItem('auth');
     this.authInformations = JSON.parse(this.authInformations);
   }

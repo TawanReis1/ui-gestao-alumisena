@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  flierApi: 'http://localhost:4000/api/v1'
+  gestaoAlumisenaApi: 'http://localhost:4000/api/v1'
 };
 
 /*

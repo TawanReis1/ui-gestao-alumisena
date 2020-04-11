@@ -10,7 +10,7 @@ export class ReportService {
   authInformations: any;
 
   constructor(private http: HttpClient) {
-    this.url = `${environment.flierApi}/report`;
+    this.url = `${environment.gestaoAlumisenaApi}/report`;
     this.authInformations = localStorage.getItem('auth');
     this.authInformations = JSON.parse(this.authInformations);
   }

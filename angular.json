@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ui-flyers": {
+    "ui-gestao-alumisena": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ui-flyers",
+            "outputPath": "dist/ui-gestao-alumisena",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ui-flyers:build"
+            "browserTarget": "ui-gestao-alumisena:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ui-flyers:build:production"
+              "browserTarget": "ui-gestao-alumisena:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ui-flyers:build"
+            "browserTarget": "ui-gestao-alumisena:build"
           }
         },
         "test": {
@@ -115,15 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ui-flyers:serve"
+            "devServerTarget": "ui-gestao-alumisena:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ui-flyers:serve:production"
+              "devServerTarget": "ui-gestao-alumisena:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "ui-flyers"
+  "defaultProject": "ui-gestao-alumisena"
 }

@@ -11,7 +11,7 @@ export class UserService {
   authInformations: any;
 
   constructor(private http: HttpClient) {
-    this.url = environment.flierApi;
+    this.url = environment.gestaoAlumisenaApi;
     this.authInformations = localStorage.getItem('auth');
     this.authInformations = JSON.parse(this.authInformations);
   }

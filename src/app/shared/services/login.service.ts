@@ -10,7 +10,7 @@ export class LoginService {
   isAuthenticated = new EventEmitter<Boolean>();
 
   constructor(private http: HttpClient) {
-    this.url = environment.flierApi;
+    this.url = environment.gestaoAlumisenaApi;
   }
 
   async getAuthToken(user) {

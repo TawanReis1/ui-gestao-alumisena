@@ -10,7 +10,7 @@ export class SaleService {
   authInformations: any;
 
   constructor(private http: HttpClient) {
-    this.url = `${environment.flierApi}/sale`;
+    this.url = `${environment.gestaoAlumisenaApi}/sale`;
     this.authInformations = localStorage.getItem('auth');
     this.authInformations = JSON.parse(this.authInformations);
   }
