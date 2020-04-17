@@ -82,7 +82,7 @@
                 </td>
             </tbody>
         </table>
-        <div class="col-12 center-content">
+        <div class="col-12 center-content" *ngIf="allSales.meta.totalPages > 1">
             <ngb-pagination [rotate]="true" maxSize="5" [collectionSize]="allSales.meta.totalItems" [(page)]="page"
                 pageSize="10" (pageChange)="changePage($event)">
             </ngb-pagination>
@@ -90,6 +90,6 @@
     </div>
 
     <div class="col-lg-12 m-t-30 center-content" *ngIf="allSales.meta.totalItems === 0 && !isLoading">
-        <h4 style="color: red;">Não existem nenhum orçamento cadastrado</h4>
+        <h4 style="color: red;">Não existe nenhuma venda cadastrada</h4>
     </div>
 </div>

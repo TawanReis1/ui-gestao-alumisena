@@ -77,10 +77,10 @@ export class SaleDetailsComponent implements OnInit {
     this.currentUser = localStorage.getItem('userInformations')
     this.currentUser = JSON.parse(this.currentUser);
 
-    await Promise.all([this.getSaleById(), this.getClients()]);
+    await this.getSaleById();
 
     if (this.sale.status !== 'SOLD') {
-      await this.getProducts();
+      await Promise.all([this.getProducts(), this.getClients()]);
     }
 
     this.isLoading = false;
@@ -206,6 +206,9 @@ export class SaleDetailsComponent implements OnInit {
           'A venda foi atualizada com sucesso.',
           'success'
         );
+        this.selectedProducts.forEach(selectedProduct => {
+          this.catalogService.updateStock(-Math.abs(selectedProduct.quantity), selectedProduct._id);
+        })
         this.router.navigate(['/sales']);
       }
     });

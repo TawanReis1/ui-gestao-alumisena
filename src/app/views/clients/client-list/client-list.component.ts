@@ -37,7 +37,7 @@ export class ClientListComponent implements OnInit {
     try {
       this.isLoading = true;
       if (Object.keys(filterFields).length === 0) {
-        filterFields = { page: this.page, limit: 10 }
+        filterFields = { page: this.page, limit: 10, sort_name: 'asc' }
       }
 
       let response = await this.clientService.get(filterFields);

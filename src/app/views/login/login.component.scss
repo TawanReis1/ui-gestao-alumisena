@@ -95,8 +95,8 @@
   height: 50px;
   border-radius: 80px;
   text-align: center;
-  border: 3px solid #8DC53E;
-  background: #8DC53E;
+  border: 3px solid #34465D;
+  background: #34465D;
   display: block;
   text-decoration: none;
   color: white;
@@ -115,8 +115,8 @@
   height: 50px;
   border-radius: 80px;
   text-align: center;
-  border: 3px solid #F5821F;
-  background: #F5821F;
+  border: 3px solid #3B9CD6;
+  background: #3B9CD6;
   display: block;
   text-decoration: none;
   color: white;
@@ -135,8 +135,8 @@
   height: 50px;
   border-radius: 80px;
   text-align: center;
-  border: 3px solid #f29220;
-  background: #f29220;
+  border: 3px solid #3B9CD6;
+  background: #3B9CD6;
   display: block;
   text-decoration: none;
   color: white;
@@ -146,13 +146,13 @@
 }
 
 .sign-btn:hover {
-  background: darken(#F5821F, 10%);
-  border: 3px solid darken(#F5821F, 10%);
+  background: darken(#3B9CD6, 10%);
+  border: 3px solid darken(#3B9CD6, 10%);
 }
 
 .login-btn:hover {
-  background: darken(#8DC53E, 15%);
-  border: 3px solid darken(#8DC53E, 15%);
+  background: darken(#34465D, 10%);
+  border: 3px solid darken(#34465D, 10%);
 }
 
 .normal-text {

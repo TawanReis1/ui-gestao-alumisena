@@ -1,1 +1,145 @@
-<p>report-details works!</p>
+<app-loader class="full-size" [condition]="isLoading"></app-loader>
+
+<div class="row" *ngIf="!isLoading">
+    <div class="col-lg-12" style="margin-bottom: 20px;">
+        <h5 class="pull-left">Detalhes do Relatório</h5>
+        <small class="pull-right" style="font-style: italic;"> Criado por: {{creationInformations.name}} </small>
+        <hr style="margin-top: 40px;">
+    </div>
+
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Nome</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="report.name" disabled>
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Tipo</label>
+        <select class="form-control" [(ngModel)]="report.type" disabled>
+            <option value="CATALOG">Catálogo</option>
+            <option value="CLIENT">Cliente</option>
+            <option value="SALE">Vendas</option>
+        </select>
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Período (Escolher apenas duas datas)</label><br>
+        <input type="text" class="form-control" [(ngModel)]="formattedDateRange" disabled>
+    </div>
+
+    <ng-container *ngIf="report.type === 'CLIENT'">
+        <div class="col-lg-12" style="margin-top: 50px;">
+            <table class="table-striped" style="width: 100%;" data-show-footer="true">
+                <thead>
+                    <th style="width: 25%;">CPF/CNPJ</th>
+                    <th style="width: 25%;">Nome/Razão Social</th>
+                    <th style="width: 25%;">Telefone</th>
+                    <th style="width: 25%;">Endereço</th>
+                </thead>
+                <tbody *ngFor="let client of report.clients; let i = index">
+                    <td>
+                        <ng-container *ngIf="client.type === 'LEGAL_ENTITY'">{{client.cpfCnpj | mask: '00.000.000/0000-00'}}</ng-container>
+                        <ng-container *ngIf="client.type === 'PRIVATE_INDIVIDUAL'">{{client.cpfCnpj | mask: '00.000.000-00'}}</ng-container>
+                    </td>
+                    <td>{{client?.name}}</td>
+                    <td>
+                        <ng-container *ngIf="client.telephone.length === 10">{{client?.telephone | mask: '(00) 0000-0000'}}</ng-container>
+                        <ng-container *ngIf="client.telephone.length === 11">{{client?.telephone | mask: '(00) 00000-0000'}}</ng-container>
+                    </td>
+                    <td>{{client?.street}},{{client?.houseNumber}} - {{client?.city}}</td>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total</td>        
+                        <td></td>        
+                        <td></td>
+                        <td>{{report.clients.length}}</td>   
+                    </tr>     
+                </tfoot>
+            </table>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="report.type === 'CATALOG'">
+        <div class="col-lg-12" style="margin-top: 50px;">
+            <table class="table-striped" style="width: 100%;" data-show-footer="true">
+                <thead>
+                    <th style="width: 20%;">Codigo</th>
+                    <th style="width: 40%;">Nome</th>
+                    <th style="width: 25%;">Preço</th>
+                    <th style="width: 15%;">Cor</th>
+                </thead>
+                <tbody *ngFor="let product of report.catalogs; let i = index">
+                    <td>{{product?.code}}</td>
+                    <td>{{product?.name}}</td>
+                    <td>{{product?.price | currency:'BRL':true}}</td>
+                    <td>{{product?.color}}</td>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total</td>        
+                        <td></td>        
+                        <td></td>
+                        <td>{{report.catalogs.length}}</td>   
+                    </tr>     
+                </tfoot>
+            </table>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="report.type === 'SALE'">
+        <div class="col-lg-12" style="margin-top: 50px;">
+            <table class="table-striped" style="width: 100%;" data-show-footer="true">
+                <thead>
+                    <th style="width: 25%;">Nome</th>
+                    <th style="width: 25%;">Cliente</th>
+                    <th style="width: 15%;">Meio de Pagamento</th>
+                    <th style="width: 15%;">Data</th>
+                    <th style="width: 20%;">Subtotal</th>
+                </thead>
+                <tbody *ngFor="let sale of report.sales; let i = index">
+                    <td>{{sale?.name}}</td>
+                    <td>{{sale?.client?.name}}</td>
+                    <td [ngSwitch]="sale?.paymentMethod">
+                        <ng-container *ngSwitchCase="'INVOICE'">Boleto</ng-container>
+                        <ng-container *ngSwitchCase="'CREDIT_CARD'">Cartão de Crédito</ng-container>
+                        <ng-container *ngSwitchCase="'MONEY'">Dinheiro</ng-container>
+                    </td>
+                    <td>{{sale?.updatedAt | date: 'dd/MM/yyyy HH:mm':'BRT'}}</td>
+                    <td>{{sale?.total | currency:'BRL':true}}</td>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total arrecadado</td>        
+                        <td></td>        
+                        <td></td>        
+                        <td></td>        
+                        <td>{{report.totalCollected | currency:'BRL':true}}</td>   
+                    </tr>
+                    <tr>
+                        <td>Item mais vendido</td>        
+                        <td></td>
+                        <td></td>        
+                        <td></td>        
+                        <td>{{report.bestSellingItem.name}}({{report.wholeQuantity}} {{report.bestSellingItem.typeQuantity}})</td>   
+                    </tr>
+                    <tr>
+                        <td>Cliente mais frequente</td>        
+                        <td></td>        
+                        <td></td>        
+                        <td></td>        
+                        <td>{{report.bestClient.name}}</td>   
+                    </tr>
+                    <tr>
+                        <td>Total de vendas</td>        
+                        <td></td>        
+                        <td></td>        
+                        <td></td>        
+                        <td>{{report.sales.length}}</td>   
+                    </tr> 
+                </tfoot>
+            </table>
+        </div>        
+    </ng-container>
+
+    <div class="col-lg-12" style="margin-top: 100px;">
+        <button (click)="cancel()" class="pull-right btn btn-secundary m-r-10">Cancelar</button>
+    </div>
+</div>

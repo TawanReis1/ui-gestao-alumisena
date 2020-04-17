@@ -130,5 +130,4 @@ export class LoginComponent implements OnInit {
 
     this.screen = screen;
   }
-
 }

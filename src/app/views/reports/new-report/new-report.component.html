@@ -1,1 +1,28 @@
-<p>new-report works!</p>
+<div class="row">
+    <div class="col-lg-12">
+        <h5>Novo Relatório</h5>
+        <hr />
+    </div>
+
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Nome</label>
+        <input type="text" name="name" class="form-control input-sm" [(ngModel)]="report.name">
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Tipo</label>
+        <select class="form-control" [(ngModel)]="report.type">
+            <option value="CATALOG">Catálogo</option>
+            <option value="CLIENT">Cliente</option>
+            <option value="SALE">Vendas</option>
+        </select>
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 5px;">
+        <label for="name">Período (Escolher apenas duas datas)</label><br>
+        <dp-date-picker [(ngModel)]="selectedDateRange" theme="dp-material" [config]="datePickerConfig"></dp-date-picker>
+    </div>
+
+    <div class="col-lg-12" style="margin-top: 100px;">
+        <button (click)="createReport()" class="pull-right btn btn-primary">Salvar</button>
+        <button (click)="cancel()" class="pull-right btn btn-secundary m-r-10">Cancelar</button>
+    </div>
+</div>

@@ -32,7 +32,6 @@ import { NewSaleComponent } from './views/sales/new-sale/new-sale.component';
 import { ReportDetailsComponent } from './views/reports/report-details/report-details.component';
 import { ReportListComponent } from './views/reports/report-list/report-list.component';
 import { NewReportComponent } from './views/reports/new-report/new-report.component';
-
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 registerLocaleData(localePt)
 @NgModule({
@@ -52,7 +51,7 @@ registerLocaleData(localePt)
     NewSaleComponent,
     ReportDetailsComponent,
     ReportListComponent,
-    NewReportComponent,
+    NewReportComponent
   ],
   imports: [
     BrowserModule,

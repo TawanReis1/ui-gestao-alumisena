@@ -97,7 +97,7 @@ export class NewSaleComponent implements OnInit {
 
   async getProducts() {
     try {
-      let filterFields = { page: 1, limit: 10 }
+      let filterFields = { page: 1, limit: 10, filter_available: true }
 
       let response;
       do {

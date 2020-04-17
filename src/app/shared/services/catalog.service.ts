@@ -59,6 +59,16 @@ export class CatalogService {
       .catch((err: HttpErrorResponse) => Promise.reject(err));
   }
 
+  async updateStock(value, id) {
+    return this.http.put(`${this.url}/${id}/stock `, {decreaseIn: value}, {
+      headers: new HttpHeaders({
+        "x-access-token": this.authInformations.accessToken
+      })
+    })
+      .toPromise()
+      .catch((err: HttpErrorResponse) => Promise.reject(err));
+  }
+
   async delete(id) {
     return this.http.delete(`${this.url}/${id}`, {
       headers: new HttpHeaders({

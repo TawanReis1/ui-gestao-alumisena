@@ -75,7 +75,7 @@
                 </td>
             </tbody>
         </table>
-        <div class="col-12 center-content">
+        <div class="col-12 center-content" *ngIf="allProducts.meta.totalPages > 1">
             <ngb-pagination [rotate]="true" maxSize="5" [collectionSize]="allProducts.meta.totalItems" [(page)]="page"
                 pageSize="10" (pageChange)="changePage($event)">
             </ngb-pagination>
